@@ -134,7 +134,7 @@ export class UserRegistrationService {
   }
 
   // Remove a movie from user favorites
-  deleteFavoriteMovies(id: string): Observable<any> {
+  deleteFavoriteMovie(id: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     return this.http

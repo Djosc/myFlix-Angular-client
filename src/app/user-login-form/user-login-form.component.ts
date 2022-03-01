@@ -9,6 +9,8 @@ import { UserRegistrationService } from '../fetch-api-data.service';
 // Used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
@@ -20,7 +22,8 @@ export class UserLoginFormComponent implements OnInit {
   constructor(
     public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -37,6 +40,8 @@ export class UserLoginFormComponent implements OnInit {
         // ! might add more than just username to local storage to improve upon the react version
         localStorage.setItem('user', response.user.Username);
         localStorage.setItem('token', response.token);
+
+        this.router.navigate(['movies']);
       },
       (response) => {
         // console.log(response);

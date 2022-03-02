@@ -18,7 +18,7 @@ export class MovieCardComponent implements OnInit {
   favoriteMovies: any[] = [];
 
   constructor(
-    public fetchMovies: UserRegistrationService,
+    public fetchApi: UserRegistrationService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {}
@@ -29,7 +29,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((resp: any) => {
+    this.fetchApi.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
@@ -37,7 +37,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   getFavoriteMovies(): void {
-    this.fetchMovies.getFavoriteMovies().subscribe((resp: any) => {
+    this.fetchApi.getFavoriteMovies().subscribe((resp: any) => {
       this.favoriteMovies = resp.FavoriteMovies;
       console.log(this.favoriteMovies);
     });

@@ -17,6 +17,8 @@ import { UpdateProfileFormComponent } from '../update-profile-form/update-profil
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
+  movies: any[] = [];
+  favIDs: any[] = [];
   favoriteMovies: any[] = [];
 
   constructor(
@@ -39,9 +41,18 @@ export class UserProfileComponent implements OnInit {
   }
 
   getFavoriteMovies(): void {
-    this.fetchApi.getFavoriteMovies().subscribe((resp: any) => {
-      this.favoriteMovies = resp.FavoriteMovies;
-      console.log(this.favoriteMovies);
+    this.fetchApi.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+
+      this.fetchApi.getFavoriteMovies().subscribe((resp: any) => {
+        this.favIDs = resp.FavoriteMovies;
+        this.movies.forEach((movie) => {
+          if (this.favIDs.some((id) => id === movie._id)) {
+            this.favoriteMovies.push(movie);
+          }
+        });
+        console.log(this.favoriteMovies);
+      });
     });
   }
 
@@ -65,5 +76,20 @@ export class UserProfileComponent implements OnInit {
       });
       this.router.navigate(['welcome']);
     }
+  }
+
+  removeFavorite(movieID: string, title: string): void {
+    this.fetchApi.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
+      console.log(resp);
+      this.snackBar.open(
+        `${title} has been removed from your favorites.`,
+        'OK',
+        {
+          duration: 2000,
+        }
+      );
+      this.ngOnInit();
+      window.location.reload();
+    });
   }
 }

@@ -31,7 +31,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateProfileFormComponent } from './update-profile-form/update-profile-form.component';
 
 const appRoutes: Routes = [
-  { path: 'welcome', component: WelcomePageComponent },
+  {
+    path: 'welcome',
+    component: WelcomePageComponent,
+    data: { showNav: false },
+  },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },

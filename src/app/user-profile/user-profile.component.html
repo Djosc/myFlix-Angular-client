@@ -1,34 +1,68 @@
 <div class="profile-container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>User's Profile</mat-card-title>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <div class="content-container">
-      <mat-card-content>
-        <span id="profile-title">Username: </span
-        >{{ user.Username }}</mat-card-content
-      >
-      <mat-card-content>
-        <span id="profile-title">Email: </span
-        >{{ user.Email }}</mat-card-content
-      >
-      <mat-card-content>
-        <span id="profile-title">Birthday: </span
-        >{{ user.Birthday | date }}</mat-card-content
-      >
-    </div>
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        class="edit-btn"
-        (click)="openEditProfileDialog()"
-      >
-        Edit Profile
-      </button>
-      <button mat-raised-button class="delete-btn" (click)="deleteUser()">
-        Delete User
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="info-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>User's Profile</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <div class="content-container">
+        <mat-card-content>
+          <span id="profile-title">Username: </span
+          >{{ user.Username }}</mat-card-content
+        >
+        <mat-card-content>
+          <span id="profile-title">Email: </span
+          >{{ user.Email }}</mat-card-content
+        >
+        <mat-card-content>
+          <span id="profile-title">Birthday: </span
+          >{{ user.Birthday | date }}</mat-card-content
+        >
+      </div>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          class="edit-btn"
+          (click)="openEditProfileDialog()"
+        >
+          Edit Profile
+        </button>
+        <button
+          mat-raised-button
+          color="error"
+          class="delete-btn"
+          (click)="deleteUser()"
+        >
+          Delete User
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <h1>Your Favorite Movies</h1>
+
+  <div class="favorites-container">
+    <mat-card
+      class="fav-card"
+      *ngFor="let movie of favoriteMovies; let i = index"
+    >
+      <mat-card-header>
+        <mat-card-title class="mat-card-fav-title">{{
+          movie.Title
+        }}</mat-card-title>
+      </mat-card-header>
+      <div class="image-container">
+        <img src="{{ movie.ImagePath }}" />
+      </div>
+      <mat-card-actions>
+        <button
+          mat-icon-button
+          (click)="removeFavorite(movie._id, movie.Title)"
+        >
+          <mat-icon> favorite </mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

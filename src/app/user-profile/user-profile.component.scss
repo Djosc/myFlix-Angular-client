@@ -1,15 +1,9 @@
 .profile-container {
   background: url("../../assets/blurry-gradient-haikei-myflix.svg");
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-size: cover;
-  height: max-content;
+  height: auto;
   padding-top: 0.5rem;
-}
-
-@media screen and (min-width: 1200px) {
-  .profile-container {
-    height: calc(100vh - 72px);
-  }
 }
 
 .info-card {

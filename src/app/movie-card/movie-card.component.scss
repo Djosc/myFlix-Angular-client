@@ -1,0 +1,45 @@
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  // margin-top: 2rem;
+  background: url("../../assets/blurry-gradient-haikei-myflix.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mat-card {
+  max-width: min-content;
+  max-height: min-content;
+  margin: 1rem;
+}
+
+.image-container {
+  max-height: min-content;
+  position: relative;
+}
+
+img {
+  width: 250px;
+  height: 400px;
+}
+
+.mat-icon-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.mat-card-header {
+  // text-align: center;
+  height: 80px;
+}
+
+.mat-card-title {
+  width: fit-content;
+  font-size: 14px;
+}
+
+.mat-button {
+  font-size: 12px;
+}

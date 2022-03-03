@@ -79,7 +79,7 @@ export class MovieCardComponent implements OnInit {
 
   // ! may need to reupdate the favorite movies array to rehydrate the data
   addFavoriteMovie(movieID: string, title: string): void {
-    this.fetchMovies.addFavoriteMovie(movieID).subscribe((resp: any) => {
+    this.fetchApi.addFavoriteMovie(movieID).subscribe((resp: any) => {
       this.snackBar.open(`${title} has been added to your favorites.`, 'OK', {
         duration: 2000,
       });
@@ -89,7 +89,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   removeFavoriteMovie(movieID: string, title: string): void {
-    this.fetchMovies.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
+    this.fetchApi.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
       this.snackBar.open(
         `${title} has been removed from your favorites.`,
         'OK',

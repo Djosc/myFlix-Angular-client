@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreCardComponent } from '../genre-card/genre-card.component';
 import { DirectorCardComponent } from '../director-card/director-card.component';
 import { DescriptionCardComponent } from '../description-card/description-card.component';
+import { UpdateProfileFormComponent } from '../update-profile-form/update-profile-form.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -42,5 +43,27 @@ export class UserProfileComponent implements OnInit {
       this.favoriteMovies = resp.FavoriteMovies;
       console.log(this.favoriteMovies);
     });
+  }
+
+  openEditProfileDialog(): void {
+    this.dialog.open(UpdateProfileFormComponent, {
+      width: '300px',
+    });
+  }
+
+  deleteUser(): void {
+    if (confirm('Are you sure you want to delete your profile?')) {
+      this.fetchApi.deleteUserProfile().subscribe((resp: any) => {
+        this.snackBar.open(
+          `${this.user.Username}'s profile has been deleted.`,
+          'OK',
+          {
+            duration: 2000,
+          }
+        );
+        localStorage.clear();
+      });
+      this.router.navigate(['welcome']);
+    }
   }
 }

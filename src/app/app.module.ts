@@ -28,6 +28,7 @@ import { DescriptionCardComponent } from './description-card/description-card.co
 import { DirectorCardComponent } from './director-card/director-card.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UpdateProfileFormComponent } from './update-profile-form/update-profile-form.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     DirectorCardComponent,
     UserProfileComponent,
     NavbarComponent,
+    UpdateProfileFormComponent,
   ],
   imports: [
     BrowserModule,

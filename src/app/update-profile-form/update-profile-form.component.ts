@@ -28,12 +28,20 @@ export class UpdateProfileFormComponent implements OnInit {
     this.getUser();
   }
 
+  /**
+   * Calls getSingleUser api service function and stores the response in this.user.
+   */
   getUser(): void {
     this.fetchApi.getSingleUser().subscribe((resp: any) => {
       this.user = resp;
     });
   }
 
+  /**
+   * Calls the editUserProfile api service function with the userData stored in this component.
+   * Local storage is then updated, snackbar displays a success message and the page is
+   * reloaded to reflect the changes.
+   */
   updateUser(): void {
     this.fetchApi.editUserProfile(this.userData).subscribe((resp: any) => {
       this.dialogRef.close();

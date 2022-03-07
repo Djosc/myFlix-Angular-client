@@ -12,6 +12,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * When the user clicks logout button on the navbar, snackbar displays a success message.
+   * Then, the router navigates back to the welcome screen.
+   */
   logOutUser(): void {
     this.snackBar.open('Successfully logged out', 'OK', {
       duration: 2000,

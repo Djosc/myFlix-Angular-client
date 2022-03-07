@@ -17,6 +17,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
+  /**
+   * Gets the Username and Password fields from the html template and stores them here.
+   */
   @Input() userData = { Username: '', Password: '' };
 
   constructor(
@@ -28,6 +31,10 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Calls the userLogin api service function with this.userData and stores the username and
+   * token in local storage. Then, the router navigates to the movies path.
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(
       (response) => {

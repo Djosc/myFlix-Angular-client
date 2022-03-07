@@ -28,6 +28,9 @@ export class MovieCardComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
+  /**
+   * Calls the getAllMovies api service function and stores the response data in a local array.
+   */
   getMovies(): void {
     this.fetchApi.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -36,6 +39,9 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Calls the getFavoriteMovies api service function and stores the response in a local array.
+   */
   getFavoriteMovies(): void {
     this.fetchApi.getFavoriteMovies().subscribe((resp: any) => {
       this.favoriteMovies = resp.FavoriteMovies;
@@ -43,6 +49,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying the genre info
+   * @param name
+   * @param description
+   * @module GenreCardComponent
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: { name: name, description: description },
@@ -50,6 +62,14 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying the director's info. Also formats the dates.
+   * @param name
+   * @param bio
+   * @param birth
+   * @param death
+   * @module DirectorCardComponent
+   */
   openDirectorDialog(
     name: string,
     bio: string,
@@ -70,6 +90,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying the movie description
+   * @param description
+   * @module DescriptionCardComponent
+   */
   openDescriptionDialog(description: string): void {
     this.dialog.open(DescriptionCardComponent, {
       data: { description: description },
@@ -77,7 +102,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // ! may need to reupdate the favorite movies array to rehydrate the data
+  /**
+   * Calls the addFavoriteMovie api service function and displays a success message with snackbar.
+   * Then, ngOnInit is called to update the favoriteMovies array.
+   * @param movieID
+   * @param title
+   */
   addFavoriteMovie(movieID: string, title: string): void {
     this.fetchApi.addFavoriteMovie(movieID).subscribe((resp: any) => {
       this.snackBar.open(`${title} has been added to your favorites.`, 'OK', {
@@ -88,6 +118,12 @@ export class MovieCardComponent implements OnInit {
     // return this.getFavoriteMovies();
   }
 
+  /**
+   * Calls the deleteFavoriteMovie api service function and displays a success message with snackbar.
+   * Then, ngOnInit is called to update the favoriteMovies array.
+   * @param movieID
+   * @param title
+   */
   removeFavoriteMovie(movieID: string, title: string): void {
     this.fetchApi.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
       this.snackBar.open(
@@ -102,10 +138,19 @@ export class MovieCardComponent implements OnInit {
     // return this.getFavoriteMovies();
   }
 
+  /**
+   * Checks if movieID in the favorites array matches the movieID from the param
+   * @param movieID
+   * @returns true or false
+   */
   isFavorite(movieID: string): boolean {
     return this.favoriteMovies.some((movie) => movie === movieID);
   }
 
+  /**
+   * Calls isFavorite. If true, calls removeFavoriteMovie. If false, calls addFavoriteMovie.
+   * @param movie
+   */
   toggleFavorite(movie: any): void {
     this.isFavorite(movie._id)
       ? this.removeFavoriteMovie(movie._id, movie.Title)

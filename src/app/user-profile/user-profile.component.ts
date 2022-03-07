@@ -33,6 +33,9 @@ export class UserProfileComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
+  /**
+   * Calls getSingleUser api service function to store user data in the component state
+   */
   getUserInfo(): void {
     this.fetchApi.getSingleUser().subscribe((resp: any) => {
       this.user = resp;
@@ -40,6 +43,13 @@ export class UserProfileComponent implements OnInit {
     console.log(this.user);
   }
 
+  /**
+   * Calls getAllMovies and getFavoriteMovies and stores them in local state.
+   * Then, the movie IDs from getFavoriteMovies are compared to the IDs in the movies array.
+   * If they match, that movie object is stored in the favoriteMovies array.
+   * It is done like this because getFavoriteMovies only returns the IDs and...
+   *  the full movie object is needed
+   */
   getFavoriteMovies(): void {
     this.fetchApi.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -56,12 +66,21 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog with the update profile form
+   * @module UpdateProfileFormComponent
+   */
   openEditProfileDialog(): void {
     this.dialog.open(UpdateProfileFormComponent, {
       width: '300px',
     });
   }
 
+  /**
+   * Confirms if the user wants to delete their profile, then calls deleteUserProfile api fucntion.
+   * Snackbar displays a success message.
+   * Local storage is then cleared and the router navigates back to the welcome screen.
+   */
   deleteUser(): void {
     if (confirm('Are you sure you want to delete your profile?')) {
       this.fetchApi.deleteUserProfile().subscribe((resp: any) => {
@@ -78,6 +97,12 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Removes a favorite movie from the user's favorite list. ngOnInit is called to update
+   *  the favoriteMovies array and the page is reloaded to display the changes.
+   * @param movieID
+   * @param title
+   */
   removeFavorite(movieID: string, title: string): void {
     this.fetchApi.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
       console.log(resp);
